@@ -15,4 +15,4 @@
 
 primers="4.1"
 
-python flaq_sc2_meta.py fastqs_ww_test/ --primer_bed primers/ARTIC-V${primers}.bed --lib_frag frag --threads $SLURM_CPUS_ON_NODE --ref_fasta reference/nCoV-2019.reference.fasta --ref_gff reference/GCF_009858895.2_ASM985889v3_genomic.gff 
+python flaq_sc2_meta.py fastqs_ww/ --primer_bed primers/ARTIC-V${primers}.bed --lib_frag frag --threads $SLURM_CPUS_ON_NODE --ref_fasta reference/nCoV-2019.reference.fasta --ref_gff reference/GCF_009858895.2_ASM985889v3_genomic.gff 
