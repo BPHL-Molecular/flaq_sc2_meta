@@ -3,7 +3,7 @@
 #SBATCH --qos=bphl-umbrella
 #SBATCH --job-name=flaq_sc2_meta
 #SBATCH --mail-type=END,FAIL
-#SBATCH --mail-user=sarah.schmedes@flhealth.gov
+#SBATCH --mail-user=ENTER EMAIL
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=15
 #SBATCH --mem=100gb
