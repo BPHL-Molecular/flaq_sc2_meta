@@ -11,6 +11,8 @@
 #SBATCH --output=flaq_sc2_meta.%j.out
 #SBATCH --error=flaq_sc2_meta.%j.err
 
+module load apptainer
+
 #Run script/command and use $SLURM_CPUS_ON_NODE
 
 primers="4.1"
