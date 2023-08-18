@@ -73,7 +73,3 @@ analysis_dir/
      |__ sample2/
 ```
 
-## Developed by:
-[@SESchmedes](https://www.github.com/SESchmedes)<br />
-
-Please email bphl16BioInformatics@flhealth.gov for questions and support.
