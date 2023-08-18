@@ -34,7 +34,7 @@
            >>>import numpy
            >>>import padas
            >>>exit()
-      If any one package is not found by python3, you need install it by pip3, such as "pip3 install cvxpy".
+      If any one package is not found by python3, you need install it by pip3, such as "pip3 install cvspy".
 
 5. Install Freyja
       (flaq-sc2-meta)$conda install freyja
