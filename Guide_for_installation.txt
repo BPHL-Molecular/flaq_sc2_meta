@@ -16,7 +16,7 @@
       If not installed, use module to load it in HPG:
            (flaq-sc2-meta)$module load ivar
    
-   2) In CLI, input "ivar" to see if samtool is installed:
+   2) In CLI, input "samtool" to see if samtool is installed:
           (flaq-sc2-meta)$samtool
       If not installed, use module to load it in HPG:
            (flaq-sc2-meta)$module load samtool
