@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 
-#Author: Sarah Schmedes
-#Email: sarah.schmedes@flhealth.gov
 
 '''
 This program takes in Illumina paired-end fastqs using the ARTIC primer schemes for SARS-CoV-2
@@ -65,8 +63,8 @@ samples.sort()
 
 #Create output file
 report = open(output_dir + '/report.txt', 'w')
-#header = ['sampleID', 'reference', 'start', 'end', 'num_raw_reads', 'num_clean_reads', 'num_mapped_reads', 'cov_bases_mapped', 'percent_genome_cov_map', 'mean_depth', 'mean_base_qual', 'mean_map_qual', 'freyja_summary', 'freyja_lineage', 'freya_lineage_abund']
-header = ['sampleID', 'reference', 'start', 'end', 'num_raw_reads', 'num_clean_reads', 'num_mapped_reads', 'cov_bases_mapped', 'percent_genome_cov_map', 'mean_depth', 'mean_base_qual', 'mean_map_qual']
+header = ['sampleID', 'reference', 'start', 'end', 'num_raw_reads', 'num_clean_reads', 'num_mapped_reads', 'cov_bases_mapped', 'percent_genome_cov_map', 'mean_depth', 'mean_base_qual', 'mean_map_qual', 'freyja_summary', 'freyja_lineage', 'freya_lineage_abund']
+#header = ['sampleID', 'reference', 'start', 'end', 'num_raw_reads', 'num_clean_reads', 'num_mapped_reads', 'cov_bases_mapped', 'percent_genome_cov_map', 'mean_depth', 'mean_base_qual', 'mean_map_qual']
 report.write('\t'.join(map(str,header)) + '\n')
 
 #Run pipeline for each sample
@@ -119,7 +117,7 @@ for s in samples:
 
     #Run multiqc
     subprocess.run('singularity exec -B $(pwd):/data /apps/staphb-toolkit/containers/multiqc_1.8.sif multiqc ' + sample_dir + '*_fastqc.zip -o ' + sample_dir, shell=True, stdout=out_log, stderr=err_log, check=True)
- 
+
     #Get number of clean reads
     proc_c1 = subprocess.run('zcat ' + sample_dir + s + '_1.fq.gz | wc -l', shell=True, capture_output=True, text=True, check=True)
     wc_out_c1 = proc_c1.stdout.rstrip()
@@ -138,7 +136,6 @@ for s in samples:
     if frag == 'no_frag':
         subprocess.run('singularity exec -B $(pwd):/data /apps/staphb-toolkit/containers/bwa_0.7.17.sif bwa mem -t ' + threads + ' ' + ref + ' ' + sample_dir + s + '_1.fq.gz ' + sample_dir + s + '_2.fq.gz | singularity exe\
 c -B $(pwd):/data /apps/staphb-toolkit/containers/samtools_1.12.sif samtools view - -F 4 -u -h | singularity exec -B $(pwd):/data /apps/staphb-toolkit/containers/samtools_1.12.sif samtools sort > ' + align_dir + s + '.sorted.bam', shell=True, check=True)
-
     #If frag == 'frag', remove PCR duplicates
     elif frag == 'frag':
         subprocess.run('singularity exec -B $(pwd):/data /apps/staphb-toolkit/containers/bwa_0.7.17.sif bwa mem -t ' + threads + ' ' + ref + ' ' + sample_dir + s + '_1.fq.gz ' + sample_dir + s + '_2.fq.gz | singularity exec -B $(pwd):/data /apps/staphb-toolkit/containers/samtools_1.12.sif samtools view - -F 4 -u -h | singularity exec -B $(pwd):/data /apps/staphb-toolkit/containers/samtools_1.12.sif samtools sort -n > ' + align_dir + s + '.namesorted.bam', shell=True, check=True) #output name sorted bam
@@ -151,6 +148,7 @@ c -B $(pwd):/data /apps/staphb-toolkit/containers/samtools_1.12.sif samtools vie
         subprocess.run('singularity exec -B $(pwd):/data /apps/staphb-toolkit/containers/samtools_1.12.sif samtools markdup -r ' + align_dir + s + '.positionsort.bam ' + align_dir + s + '.dedup.bam', shell=True, check=True)
         #Sort dedup.bam and rename to .sorted.bam
         subprocess.run('singularity exec -B $(pwd):/data /apps/staphb-toolkit/containers/samtools_1.12.sif samtools sort -o ' + align_dir + s + '.sorted.bam ' + align_dir + s + '.dedup.bam', shell=True, check=True)
+
 
     #Index final sorted bam from either no_frag or frag paths
     subprocess.run('singularity exec -B $(pwd):/data /apps/staphb-toolkit/containers/samtools_1.12.sif samtools index ' + align_dir + s + '.sorted.bam', shell=True, check=True)
@@ -190,23 +188,24 @@ c -B $(pwd):/data /apps/staphb-toolkit/containers/samtools_1.12.sif samtools vie
 
 # ADD BACK IN ONCE GITHUB ISSUE RESOLVED FOR OUTPUT FORMAT
 #    #Parse freyja
-#    with open(align_dir + 'freyja/' + s + '.freyja.out', 'r') as freyja_out:
-#        header = freyja_out.readline()
-#        summ = freyja_out.readline()
-#        summ = summ.rstrip()
-#        summ = summ.split("\t")[1]
-#        lineage = freyja_out.readline()
-#        lineage = lineage.rstrip()
-#        lineage = lineage.split("\t")[1]
-#        abund = freyja_out.readline()
-#        abund = abund.rstrip()
-#        abund = abund.split("\t")[1]
+    with open(align_dir + 'freyja/' + s + '.freyja.out', 'r') as freyja_out:
+        header = freyja_out.readline()
+        summ = freyja_out.readline()
+        summ = summ.rstrip()
+        summ = summ.split("\t")[1]
+        lineage = freyja_out.readline()
+        lineage = lineage.rstrip()
+        lineage = lineage.split("\t")[1]
+        abund = freyja_out.readline()
+        abund = abund.rstrip()
+        abund = abund.split("\t")[1]
 
     #Write to output file
-#    results = [s, ref_name, start, end, raw_reads, clean_reads, reads_mapped, cov_bases, cov, depth, baseq, mapq, summ, lineage, abund] 
-    results = [s, ref_name, start, end, raw_reads, clean_reads, reads_mapped, cov_bases, cov, depth, baseq, mapq]
+    results = [s, ref_name, start, end, raw_reads, clean_reads, reads_mapped, cov_bases, cov, depth, baseq, mapq, summ, lineage, abund] 
+#    results = [s, ref_name, start, end, raw_reads, clean_reads, reads_mapped, cov_bases, cov, depth, baseq, mapq]
     report.write('\t'.join(map(str,results)) + '\n')
     out_log.close()
     err_log.close()
 
+ 
 report.close()

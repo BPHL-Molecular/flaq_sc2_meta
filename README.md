@@ -35,12 +35,12 @@ To run the FLAQ-SC2-Meta pipeline, copy all files from the flaq_sc2_meta local r
 mkdir <analysis_dir>
 cd <analysis_dir>
 cp /blue/bphl-<state>/<user>/repos/bphl-molecular/flaq_sc2_meta/* .
-mkdir fastqs/
-cp /path/to/fastqs/*.fastq.gz fastqs/
+mkdir fastqs_ww/
+cp /path/to/fastqs/*.fastq.gz fastqs_ww/
 ```
 Rename your fastq files to the following format: sample_1.fastq.gz, sample_2.fastq.gz. See below for a helpful command to rename your R1 and R2 files.
 ```
-cd fastqs/
+cd fastqs_ww/
 for i in *_R1_001.fastq.gz; do mv -- "$i" "${i%[PATTERN to REMOVE]}_1.fastq.gz"; done
 for i in *_R2_001.fastq.gz; do mv -- "$i" "${i%[PATTERN to REMOVE]}_2.fastq.gz"; done
 ```
