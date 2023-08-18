@@ -17,6 +17,8 @@ Singularity/Apptainer will be loaded as a module during your job execution on HP
 Freyja can be installed via [conda](https://anaconda.org/bioconda/freyja). Activate your freyja conda environment with `conda activate freyja`.
 
 Git is already installed in your HPG environment upon login.
+## Installation
+For first-time users of the pipeline, please read the file "Guide_for_installation" before you run the pipeline.
 
 ## Usage
 
