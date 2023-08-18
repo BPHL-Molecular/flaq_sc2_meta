@@ -14,12 +14,12 @@
    1) In CLI, input "ivar" to see if ivar is installed:
           (flaq-sc2-meta)$ivar
       If not installed, use module to load it in HPG:
-           (flaq-sc2-meta)$module load ivar
+           (flaq-sc2-meta)$conda install ivar
    
    2) In CLI, input "samtools" to see if samtools is installed:
           (flaq-sc2-meta)$samtools
       If not installed, use module to load it in HPG:
-           (flaq-sc2-meta)$module load samtools
+           (flaq-sc2-meta)$conda install -c bioconda samtools
    
    3) In CLI, input "usher" to see if usher is installed:
           (flaq-sc2-meta)$usher
