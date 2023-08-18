@@ -34,7 +34,7 @@
            >>>import numpy
            >>>import pandas
            >>>exit()
-      If any one package is not found by python3, you need install it by pip3, such as "pip3 install cvxpy".
+      If any one package is not found by python3, you need install it by conda, such as "conda install -c conda-forge cvxpy".
 
 5. Install Freyja
       (flaq-sc2-meta)$conda install freyja
