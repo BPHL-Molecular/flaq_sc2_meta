@@ -1,34 +1,34 @@
-1. Create a new conda environment for flaq-sc2-meta running
+##1. Create a new conda environment for flaq-sc2-meta running
     $conda create -n flaq-sc2-meta
 
-2. Activate the environment "flaq-sc2-meta"
+##2. Activate the environment "flaq-sc2-meta"
     $conda activate flaq-sc2-meta
 
-3. Add channels
+##3. Add channels
     (flaq-sc2-meta)$conda config --add channels defaults
     (flaq-sc2-meta)$conda config --add channels bioconda
     (flaq-sc2-meta)$conda config --add channels conda-forge
 
-4. Check if the dependencies of Freyja are all installed    
+##4. Check if the dependencies of Freyja are all installed    
     
-   1) In CLI, input "ivar" to see if ivar is installed:
+   ###1) In CLI, input "ivar" to see if ivar is installed:
           (flaq-sc2-meta)$ivar
       If not installed, use module to load it in HPG:
            (flaq-sc2-meta)$module load ivar
    
-   2) In CLI, input "ivar" to see if samtool is installed:
+   ###2) In CLI, input "ivar" to see if samtool is installed:
           (flaq-sc2-meta)$samtool
       If not installed, use module to load it in HPG:
            (flaq-sc2-meta)$module load samtool
    
-   3) In CLI, input "usher" to see if usher is installed:
+   ###3) In CLI, input "usher" to see if usher is installed:
           (flaq-sc2-meta)$usher
       If not installed, install it:
            (flaq-sc2-meta)$conda install usher
       
       Note: After you install usher, you probably need close the terminal and open it again and then activate the environment "flaq-sc2-meta", then go to next step 4).
 
-   4) check if the python packages (cvxpy, numpy, pandas) are installed:
+   ###4) check if the python packages (cvxpy, numpy, pandas) are installed:
            (flaq-sc2-meta)$python3
            >>>import cvspy
            >>>import numpy
@@ -36,19 +36,19 @@
            >>>exit()
       If any one package is not found by python3, you need install it by pip3, such as "pip3 install cvxpy".
 
-5. Install Freyja
+##5. Install Freyja
       (flaq-sc2-meta)$conda install freyja
 
-6. Check if Python3 and Singularity are working 
+##6. Check if Python3 and Singularity are working 
       (flaq-sc2-meta)$python3
       (flaq-sc2-meta)$singularty
 
-7. Download flaq-sc2-meta from github and run it according to its README file.
+##7. Download flaq-sc2-meta from github and run it according to its README file.
 
-Note1: when you finish your data analysis by the pipeline, you can exit from the conda environment "flaq-sc2-meta":
+#Note1: when you finish your data analysis by the pipeline, you can exit from the conda environment "flaq-sc2-meta":
                       (flaq-sc2-meta)$conda deactivate
 
-Note2: In the futher, when you want to use the pipeline, first you need activate the conda environment "flaq-sc2-meta" by the command:
+#Note2: In the futher, when you want to use the pipeline, first you need activate the conda environment "flaq-sc2-meta" by the command:
                 $conda activate flaq-sc2-meta
        
        ,and then you can run the pipeline.
