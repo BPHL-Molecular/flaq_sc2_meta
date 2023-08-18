@@ -30,11 +30,11 @@
 
    4) check if the python packages (cvxpy, numpy, pandas) are installed:
            (flaq-sc2-meta)$python3
-           >>>import cvspy
+           >>>import cvxpy
            >>>import numpy
            >>>import padas
            >>>exit()
-      If any one package is not found by python3, you need install it by pip3, such as "pip3 install cvspy".
+      If any one package is not found by python3, you need install it by pip3, such as "pip3 install cvxpy".
 
 5. Install Freyja
       (flaq-sc2-meta)$conda install freyja
