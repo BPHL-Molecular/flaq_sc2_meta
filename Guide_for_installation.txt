@@ -32,7 +32,7 @@
            (flaq-sc2-meta)$python3
            >>>import cvxpy
            >>>import numpy
-           >>>import padas
+           >>>import pandas
            >>>exit()
       If any one package is not found by python3, you need install it by pip3, such as "pip3 install cvxpy".
 
