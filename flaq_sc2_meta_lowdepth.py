@@ -184,8 +184,8 @@ c -B $(pwd):/data /apps/staphb-toolkit/containers/samtools_1.12.sif samtools vie
     subprocess.run('freyja update', shell=True, check=True, stdout=out_log, stderr=err_log)
     subprocess.run('mkdir ' + align_dir + 'freyja/', shell=True, check=True)
     subprocess.run('freyja variants ' + align_dir + s + '.primertrim.sorted.bam --variants ' + align_dir + 'freyja/' + s + '.variants --depths ' + align_dir + 'freyja/' + s + '.depths --ref ' + ref, shell=True, stdout=out_log, stderr=err_log, check=True)
-    #subprocess.run('freyja demix --eps 0.01 --depthcutoff 10 ' + align_dir + 'freyja/' + s + '.variants.tsv ' + align_dir + 'freyja/' + s + '.depths --output ' + align_dir + 'freyja/' + s + '.freyja.out', shell=True, stdout=out_log, stderr=err_log, check=True)
-    subprocess.run('freyja demix --eps 0.01 ' + align_dir + 'freyja/' + s + '.variants.tsv ' + align_dir + 'freyja/' + s + '.depths --output ' + align_dir + 'freyja/' + s + '.freyja.out', shell=True, stdout=out_log, stderr=err_log, check=True)
+    subprocess.run('freyja demix --eps 0.01 --depthcutoff 10 ' + align_dir + 'freyja/' + s + '.variants.tsv ' + align_dir + 'freyja/' + s + '.depths --output ' + align_dir + 'freyja/' + s + '.freyja.out', shell=True, stdout=out_log, stderr=err_log, check=True)
+    #subprocess.run('freyja demix --eps 0.01 ' + align_dir + 'freyja/' + s + '.variants.tsv ' + align_dir + 'freyja/' + s + '.depths --output ' + align_dir + 'freyja/' + s + '.freyja.out', shell=True, stdout=out_log, stderr=err_log, check=True)
 
 
 # ADD BACK IN ONCE GITHUB ISSUE RESOLVED FOR OUTPUT FORMAT

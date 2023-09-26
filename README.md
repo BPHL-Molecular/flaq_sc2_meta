@@ -17,6 +17,8 @@ Singularity/Apptainer will be loaded as a module during your job execution on HP
 Freyja can be installed via [conda](https://anaconda.org/bioconda/freyja). Activate your freyja conda environment with `conda activate freyja`.
 
 Git is already installed in your HPG environment upon login.
+## Installation
+For first-time users of the pipeline, please read the file "Guide_for_installation" before you run the pipeline.
 
 ## Usage
 
@@ -35,12 +37,12 @@ To run the FLAQ-SC2-Meta pipeline, copy all files from the flaq_sc2_meta local r
 mkdir <analysis_dir>
 cd <analysis_dir>
 cp /blue/bphl-<state>/<user>/repos/bphl-molecular/flaq_sc2_meta/* .
-mkdir fastqs/
-cp /path/to/fastqs/*.fastq.gz fastqs/
+mkdir fastqs_ww/
+cp /path/to/fastqs/*.fastq.gz fastqs_ww/
 ```
 Rename your fastq files to the following format: sample_1.fastq.gz, sample_2.fastq.gz. See below for a helpful command to rename your R1 and R2 files.
 ```
-cd fastqs/
+cd fastqs_ww/
 for i in *_R1_001.fastq.gz; do mv -- "$i" "${i%[PATTERN to REMOVE]}_1.fastq.gz"; done
 for i in *_R2_001.fastq.gz; do mv -- "$i" "${i%[PATTERN to REMOVE]}_2.fastq.gz"; done
 ```
@@ -49,6 +51,10 @@ Edit your sbatch job submission script to include your email to receive an email
 Submit your job.
 ```
 sbatch sbatch_flaq_sc2_meta.sh
+```
+If a sample has low coverage and insufficient sequencing depth, the command below may be used.
+```
+sbatch sbatch_flaq_sc2_meta_lowdepth.sh
 ```
 
 ## Main processes
@@ -71,7 +77,3 @@ analysis_dir/
      |__ sample2/
 ```
 
-## Developed by:
-[@SESchmedes](https://www.github.com/SESchmedes)<br />
-
-Please email bphl16BioInformatics@flhealth.gov for questions and support.
