@@ -19,6 +19,8 @@ Freyja can be installed via [conda](https://anaconda.org/bioconda/freyja). Activ
 Git is already installed in your HPG environment upon login.
 ## Installation
 For first-time users of the pipeline, please read the file "Guide_for_installation" before you run the pipeline.
+## Primers
+The default primer in the pipeline is ARTIC-V4.1.bed. If your SARS-CoV-2 data use different ARTIC primer, you need change the line 16 "primers="4.1"" in sbatch_flaq_sc2_meta.sh or sbatch_flaq_sc2_meta_lowdepth.sh. For example, if ARTIC-V5.3.2.bed is used, primers="4.1" should be repalced with primers="5.3.2".
 
 ## Usage
 
