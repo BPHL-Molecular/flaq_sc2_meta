@@ -4,7 +4,7 @@
 #SBATCH --job-name=flaq_sc2_meta
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=15
-#SBATCH --mem=50gb
+#SBATCH --mem=100gb
 #SBATCH --time=3-00
 #SBATCH --output=flaq_sc2_meta.%j.out
 #SBATCH --error=flaq_sc2_meta.%j.err
@@ -15,4 +15,4 @@ module load apptainer
 
 primers="4.1"
 
-python flaq_sc2_meta.py fastqs_ww/ --primer_bed primers/ARTIC-V${primers}.bed --lib_frag frag --threads $SLURM_CPUS_ON_NODE --ref_fasta reference/nCoV-2019.reference.fasta --ref_gff reference/GCF_009858895.2_ASM985889v3_genomic.gff 
+python flaq_sc2_meta_lowdepth.py fastqs_ww/ --primer_bed primers/ARTIC-V${primers}.bed --lib_frag frag --threads $SLURM_CPUS_ON_NODE --ref_fasta reference/nCoV-2019.reference.fasta --ref_gff reference/GCF_009858895.2_ASM985889v3_genomic.gff 
