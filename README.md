@@ -52,11 +52,7 @@ Edit your sbatch job submission script to include your email to receive an email
 
 Submit your job.
 ```
-sbatch sbatch_flaq_sc2_meta.sh
-```
-If a sample has low coverage and insufficient sequencing depth, the command below may be used.
-```
-sbatch sbatch_flaq_sc2_meta_lowdepth.sh
+sbatch sbatch_flaq_sc2_meta_x.sh
 ```
 
 ## Main processes
