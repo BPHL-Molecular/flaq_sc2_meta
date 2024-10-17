@@ -1,0 +1,13 @@
+Quickest Way:
+ $conda create -n flaq-sc2-meta -c conda-forge python=3.10 ivar samtools usher cvxpy numpy pandas freyja=1.4.5
+
+
+Note: When you want to use the pipeline, first you need activate the conda environment "flaq-sc2-meta" by the command:
+                $conda activate flaq-sc2-meta
+       
+       ,and then you can run the pipeline.
+                              
+
+        
+
+
