@@ -5,22 +5,20 @@ FL BPHL's SARS-CoV-2 (SC2) analysis pipeline for Illumina paired-end, whole-geno
 FLAQ-SC2-Meta was developed to analyze Illumina paired-end, whole-genome tiled-amplicon data (i.e., [ARTIC protocol](https://artic.network/ncov-2019)) from wastewater samples. The pipeline generates variant files along with reports including read/mapping quality metrics and estimated Pango lineage abundances. The current version will run only on [HiPerGator](https://www.rc.ufl.edu/about/hipergator/)(HPG) using local Singularity containers for each pipeline process.
 
 ## Dependencies
-- Python3
+- Python3.7-3.10
 - Singularity/Apptainer
-- [Freyja](https://github.com/andersen-lab/Freyja)
 - Git
-
-To load python3 into your current environment on HiPerGator, either use `module load python` to get the lastest version of python or activate your base conda environment. For more information on how to set up your base conda environment on HPG, see the [HiPerGator Analysis Reference Guide](https://github.com/StaPH-B/southeast-region/tree/master/hipergator)).
 
 Singularity/Apptainer will be loaded as a module during your job execution on HPG using the sbatch job script in this repository. 
 
-Freyja can be installed via [conda](https://anaconda.org/bioconda/freyja). Activate your freyja conda environment with `conda activate freyja`.
+Git is already installed in your HPG environment upon login.     
 
-Git is already installed in your HPG environment upon login.
-## Installation
-For first-time users of the pipeline, please read the file "Guide_for_installation" before you run the pipeline.
 ## Primers
 The default primer in the pipeline is ARTIC-V4.1.bed. If your SARS-CoV-2 data use different ARTIC primer, you need change the line 16 "primers="4.1"" in sbatch_flaq_sc2_meta.sh or sbatch_flaq_sc2_meta_lowdepth.sh. For example, if ARTIC-V5.3.2.bed is used, primers="4.1" should be repalced with primers="5.3.2".
+
+## Installation
+For first-time users of the pipeline, please read the file "Guide_for_installation" before you run the pipeline.
+
 
 ## Usage
 
@@ -52,7 +50,7 @@ Edit your sbatch job submission script to include your email to receive an email
 
 Submit your job.
 ```
-sbatch sbatch_flaq_sc2_meta_x.sh
+sbatch sbatch_flaq_sc2_meta_all.sh
 ```
 
 ## Main processes

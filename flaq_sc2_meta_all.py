@@ -24,8 +24,7 @@ parser.add_argument('--lib_frag', default='no_frag', choices=['no_frag', 'frag']
 parser.add_argument('--threads', default=8, dest='threads', help='specify number of threads, (default: %(default)s)')
 parser.add_argument('--ref_fasta', help='path to reference fasta')
 parser.add_argument('--ref_gff', help='path to reference gff')
-#### add the argument for Freyja cutoff
-parser.add_argument('--depthcutoff', default=10, help='the parameter of depth-cutoff in Freyja ')
+
 
 if len(sys.argv[1:]) == 0:
     parser.print_help()
@@ -40,8 +39,6 @@ threads = str(args.threads)
 ref = os.path.abspath(args.ref_fasta)
 gff = os.path.abspath(args.ref_gff)
 cwd = os.getcwd() + '/'
-#### add variable
-dcf = str(args.depthcutoff)
 
 output_dir = cwd + datetime.datetime.today().strftime('%Y-%m-%d-%H%M%S') + '_flaq_ww_run'
 subprocess.run('mkdir -p ' + output_dir, shell=True, check=True) #make output directory date_flaq_legion_run
@@ -186,10 +183,9 @@ c -B $(pwd):/data /apps/staphb-toolkit/containers/samtools_1.12.sif samtools vie
     #Run Freyja
     subprocess.run('freyja update', shell=True, check=True, stdout=out_log, stderr=err_log)
     subprocess.run('mkdir ' + align_dir + 'freyja/', shell=True, check=True)
-    subprocess.run('freyja variants ' + align_dir + s + '.primertrim.sorted.bam --variants ' + align_dir + 'freyja/' + s + '.variants --depths ' + align_dir + 'freyja/' + s + '.depths --ref ' + ref, shell=True, stdout=out_log, stderr=err_log, check=True)
-    #### a new command including the variable dcf
-    subprocess.run('freyja demix --eps 0.01 --depthcutoff ' + dcf + ' ' + align_dir + 'freyja/' + s + '.variants.tsv ' + align_dir + 'freyja/' + s + '.depths --output ' + align_dir + 'freyja/' + s + '.freyja.out', shell=True, stdout=out_log, stderr=err_log, check=True)
+    subprocess.run('singularity exec docker://staphb/freyja:1.4.5 freyja variants ' + align_dir + s + '.primertrim.sorted.bam --variants ' + align_dir + 'freyja/' + s + '.variants --depths ' + align_dir + 'freyja/' + s + '.depths --ref ' + ref, shell=True, stdout=out_log, stderr=err_log, check=True)
     #subprocess.run('freyja demix --eps 0.01 --depthcutoff 10 ' + align_dir + 'freyja/' + s + '.variants.tsv ' + align_dir + 'freyja/' + s + '.depths --output ' + align_dir + 'freyja/' + s + '.freyja.out', shell=True, stdout=out_log, stderr=err_log, check=True)
+    subprocess.run('singularity exec docker://staphb/freyja:1.4.5 freyja demix --eps 0.01 --depthcutoff 10 ' + align_dir + 'freyja/' + s + '.variants.tsv ' + align_dir + 'freyja/' + s + '.depths --output ' + align_dir + 'freyja/' + s + '.freyja.out', shell=True, stdout=out_log, stderr=err_log, check=True)
     #subprocess.run('freyja demix --eps 0.01 ' + align_dir + 'freyja/' + s + '.variants.tsv ' + align_dir + 'freyja/' + s + '.depths --output ' + align_dir + 'freyja/' + s + '.freyja.out', shell=True, stdout=out_log, stderr=err_log, check=True)
 
 
